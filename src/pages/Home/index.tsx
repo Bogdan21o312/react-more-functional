@@ -4,6 +4,7 @@ import {postAPI} from "../../sevices/PostService";
 import PosList from "../../components/PosList";
 import PostItem from "../../components/PostItem";
 import Button from "../../components/@UI/Button";
+import Input from "../../components/@UI/Input";
 
 const Index = () => {
     const {data: posts, isLoading, error} = postAPI.useFetchAllTestQuery('')
@@ -13,9 +14,11 @@ const Index = () => {
         <Layout>
             {isLoading && <h1>Loading...</h1>}
             {error && <h2>Error...</h2>}
-            <Button>
-                Click me
-            </Button>
+            <form action="#">
+                <Input type="text" placeholder="Name post"/>
+                <Input type="text" placeholder="Description post"/>
+                <Button>Click me</Button>
+            </form>
             <PosList title={'ALL POSTS'}>
                 {posts && posts.map(posts =>
                     <PostItem

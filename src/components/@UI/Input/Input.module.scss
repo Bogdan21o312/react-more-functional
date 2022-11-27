@@ -1,0 +1,22 @@
+@import "src/assets/style/Style.module";
+
+.Input {
+  outline: none;
+  color: rgba(145, 145, 145, 0.88);
+  border-radius: 2%;
+  padding: rem(12);
+  margin: rem(10);
+  @include adaptiveValue("font-size", 14, 12);
+  background: #e8e8e8;
+  border: rem(1) solid #e8e8e8;
+  transition: all .3s;
+  box-shadow: 6px 6px 12px #c5c5c5,
+  -6px -6px 12px #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:focus {
+    color: #000;
+    border: rem(1) solid white;
+  }
+}
