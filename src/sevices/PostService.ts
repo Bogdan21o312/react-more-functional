@@ -8,7 +8,7 @@ export const postAPI = createApi({
     endpoints: (build) => ({
         fetchAllTest: build.query<IPost[], any>({
             query: () => ({
-                url: '/post'
+                url: '/posts'
             })
         })
     })
