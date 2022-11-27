@@ -12,16 +12,17 @@ const Index = () => {
         <Layout>
             {isLoading && <h1>Loading...</h1>}
             {error && <h2>Error...</h2>}
-            {posts && posts.map(posts =>
-                <PosList title={'ALL POSTS'}>
+            <PosList title={'ALL POSTS'}>
+                {posts && posts.map(posts =>
                     <PostItem
+                        key={posts.id}
                         userId={posts.userId}
                         id={posts.id}
                         title={posts.title}
                         body={posts.body}
                     />
-                </PosList>
-            )}
+                )}
+            </PosList>
         </Layout>
     );
 };
