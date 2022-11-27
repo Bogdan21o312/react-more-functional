@@ -1,0 +1,66 @@
+@use "sass:math";
+@import "src/assets/style/Style.module";
+
+.Button {
+  align-items: center;
+  background: #f5f5fa;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: -10px -10px 30px 0 #fff, 10px 10px 30px 0 #1d0dca17;
+  box-sizing: border-box;
+  color: #2a1f62;
+  cursor: pointer;
+  display: flex;
+  font-family: "Cascadia Code", Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  @include adaptiveValue("font-size", 18, 14);
+  justify-content: center;
+  line-height: math.div(22, 18);
+  @include adaptiveValue("padding", 15, 10);
+  position: relative;
+  text-align: left;
+  transition: .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: pre;
+  width: max-content;
+  word-break: normal;
+  word-spacing: normal;
+
+  &:hover {
+    background: #f8f8ff;
+    box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 #1d0dca17;
+  }
+}
+
+//
+//.Button {
+//  color: #000;
+//  border-radius: 50%;
+//  @include adaptiveValue("width", 50, 30);
+//  @include adaptiveValue("height", 50, 30);
+//  @include adaptiveValue("font-size", 30, 15);
+//  background: #e8e8e8;
+//  border: rem(1) solid #e8e8e8;
+//  transition: all .3s;
+//  box-shadow: 6px 6px 12px #c5c5c5,
+//  -6px -6px 12px #ffffff;
+//  display: flex;
+//  justify-content: center;
+//  align-items: center;
+//  svg {
+//    @include adaptiveValue("width", 10, 15);
+//    @include adaptiveValue("height", 10, 15);
+//  }
+//  &:active {
+//    fill: #666;
+//    box-shadow: inset 4px 4px 12px #c5c5c5,
+//    inset -4px -4px 12px #ffffff;
+//  }
+//
+//  &:hover {
+//    border: rem(1) solid white;
+//    fill: #000;
+//  }
+//}
+
