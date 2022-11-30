@@ -1,0 +1,24 @@
+@import "src/assets/style/Style.module";
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: none;
+  background: rgba(0,0,0, 0.25);
+  &Content {
+    @include adaptiveValue("padding", 30, 15);
+    background-color: white;
+    border-radius: rem(10);
+    min-width: rem(250);
+    max-width: 80%;
+  }
+}
+
+.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
