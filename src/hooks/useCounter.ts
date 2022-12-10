@@ -2,7 +2,7 @@ import {useState} from "react";
 import classes from "../pages/Home/Home.module.scss";
 
 
-export const useCounter = (max: number) => {
+export const useCounter = (max: number, moreMax: number) => {
     const [count, setCount] = useState(0)
     const [activeIncrement, setActiveIncrement] = useState(classes.Active)
     const [activeDecrement, setActiveDecrement] = useState('')
@@ -29,6 +29,34 @@ export const useCounter = (max: number) => {
             setActiveDecrement('')
         }
     }
+    const incrementCounterMore = () => {
+        max--
+        max--
+        if (count < ++max - moreMax) {
+            if (count <= max) {
+                setCount(count + moreMax)
+                setActiveDecrement(classes.Active)
+            }
+        } else {
+            setCount(++max)
+            setActiveIncrement('')
+        }
+        if (count <= ++moreMax - max) {
+            setCount(max)
+            setActiveIncrement('')
+        }
+    }
+    const decrementCounterMore = () => {
+        max--
+        max--
+        if (count > moreMax) {
+            setCount(count - moreMax)
+            setActiveIncrement(classes.Active)
+        } else {
+            setCount(0)
+            setActiveDecrement('')
+        }
+    }
 
     return {
         count,
@@ -36,7 +64,10 @@ export const useCounter = (max: number) => {
         decrementCounter,
         activeIncrement,
         activeDecrement,
+        incrementCounterMore,
+        decrementCounterMore,
         max,
+        moreMax,
     }
 
 }
