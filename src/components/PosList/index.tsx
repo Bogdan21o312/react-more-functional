@@ -1,17 +1,22 @@
 import React, {FC, ReactNode} from 'react';
+import PostItem from "../PostItem";
+import {IPost} from "../../models/IPost";
 
 interface PostListProps {
     title: string
-    children: ReactNode
+    post: IPost[] | undefined
 }
 
-const Index:FC<PostListProps> = ({title, children}) => {
+const Index:FC<PostListProps> = ({title, post}) => {
     return (
         <div>
             <h1>{title}</h1>
-            <div>
-                {children}
-            </div>
+            {post && post.map(post =>
+                <PostItem
+                    key={post.id}
+                    post={post}
+                />
+            )}
         </div>
     );
 };
