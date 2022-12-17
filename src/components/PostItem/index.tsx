@@ -1,12 +1,17 @@
 import React, {FC} from 'react';
 import {IPost} from "../../models/IPost";
 
-const Index:FC<IPost> = ({id, title, body}) => {
+interface PostItemProps {
+    post: IPost
+}
+
+const Index: FC<PostItemProps> = ({post}) => {
     return (
-        <div>
-            <h1>{id}</h1>
-            <h2>{title}</h2>
-            <p>{body}</p>
+        <div style={{margin: 10}}>
+            <strong>{post.id}</strong>
+            <h1>{post.title}</h1>
+            <p>{post.body}</p>
+            <button>Delete</button>
         </div>
     );
 };
