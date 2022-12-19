@@ -1,35 +1,55 @@
-import React from 'react';
+import React, {ChangeEvent, MouseEvent, useEffect, useMemo, useState} from 'react';
 import Layout from "../../components/@UI/Layout";
 import {postAPI} from "../../sevices/PostService";
-import PosList from "../../components/PosList";
 import PostItem from "../../components/PostItem";
 import Button from "../../components/@UI/Button";
 import Input from "../../components/@UI/Input";
+import {IPost} from "../../models/IPost";
+import PostFrom from "../../components/PostFrom";
+import PosList from "../../components/PosList";
+import Select from "../../components/@UI/Select/Select";
+import PostFilter from "../../components/PostFilter";
+import {usePosts} from "../../hooks/usePosts";
+import ModalWindow from "../../components/@UI/ModalWindow";
 
 const Index = () => {
-    const {data: posts, isLoading, error} = postAPI.useFetchAllTestQuery('')
+    const [limit, setLimit] = useState(5)
+    const [page, setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(0)
+    const [filter, setFilter] = useState({sort: '', query: ''})
+    const {data: posts, isLoading, error} = postAPI.useFetchAllPostQuery('')
 
+    const [createPost, {error: createError, isLoading: isCreateLoading}] = postAPI.useCreatePostMutation()
+    const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+    const [modal, setModal] = useState(false)
+    // setTotalCount(posts['x-totral-count'])
+
+    const handleCreate = (posts: IPost) => {
+        createPost({...posts} as IPost)
+        setModal(false)
+    }
+
+    // const totalCount =
+
+    const handleSetModal = () => setModal(true)
 
     return (
         <Layout>
+            <ModalWindow visible={modal} setVisible={setModal}>
+                <PostFrom create={handleCreate}/>
+            </ModalWindow>
+            <Button onClick={handleSetModal}>
+                Created Post
+            </Button>
+            <PostFilter filter={filter} setFilter={setFilter}/>
             {isLoading && <h1>Loading...</h1>}
             {error && <h2>Error...</h2>}
-            <form action="#">
-                <Input type="text" placeholder="Name post"/>
-                <Input type="text" placeholder="Description post"/>
-                <Button>Click me</Button>
-            </form>
-            <PosList title={'ALL POSTS'}>
-                {posts && posts.map(posts =>
-                    <PostItem
-                        key={posts.id}
-                        userId={posts.userId}
-                        id={posts.id}
-                        title={posts.title}
-                        body={posts.body}
-                    />
-                )}
-            </PosList>
+            {sortedAndSearchedPosts ?
+                <PosList title={'Some title'} post={sortedAndSearchedPosts}/>
+                :
+                <div>Posts none</div>
+            }
+
         </Layout>
     );
 };
