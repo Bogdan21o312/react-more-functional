@@ -1,0 +1,55 @@
+@import "../../assets/style/Style.module";
+
+
+
+.CounterButton {
+  fill: rgba(145, 145, 145, 0.68);
+  border-radius: 50%;
+  @include adaptiveValue("width", 50, 30);
+  @include adaptiveValue("height", 50, 30);
+  @include adaptiveValue("font-size", 30, 15);
+  background: #e8e8e8;
+  border: rem(1) solid #e8e8e8;
+  transition: all .3s;
+  box-shadow: 6px 6px 12px #c5c5c5,
+  -6px -6px 12px #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    @include adaptiveValue("width", 10, 15);
+    @include adaptiveValue("height", 10, 15);
+  }
+  &:active {
+  }
+
+  &:hover {
+    border: rem(1) solid red;
+    fill: red;
+  }
+}
+
+.Active {
+  fill: #000;
+  &:hover {
+    border: rem(1) solid white;
+    fill: #000;
+  }
+  &:active {
+    fill: #666;
+    box-shadow: inset 4px 4px 12px #c5c5c5,
+    inset -4px -4px 12px #ffffff;
+  }
+}
+.CounterBody {
+  @include adaptiveValue("padding-top", 20, 10);
+  @include adaptiveValue("padding-bottom", 20, 10);
+  @include adaptiveValue("padding-right", 40, 20);
+  @include adaptiveValue("padding-left", 40, 20);
+  display: flex;
+  background: #e8e8e8;
+  border: rem(1) solid #e8e8e8;
+  transition: all .3s;
+  box-shadow: 6px 6px 12px #c5c5c5,
+  -6px -6px 12px #ffffff;
+}
