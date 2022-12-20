@@ -4,6 +4,8 @@ import classes from "./Button.module.scss"
 interface ButtonProps {
     children: ReactNode
     onClick?: any
+    isLoading?:any
+    disabled?: any
 }
 
 const Index: FC<ButtonProps> = ({children, ...props}) => {

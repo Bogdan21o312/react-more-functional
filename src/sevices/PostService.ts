@@ -1,22 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
 import {BASE_URL} from "../config";
 import {IPost} from "../models/IPost";
-import {RootState} from "../store/store";
-
-
-export const baseQuery = fetchBaseQuery({
-    baseUrl: BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
-        const token = (getState() as RootState).auth.token;
-
-        // If we have a token set in state, let's assume that we should be passing it.
-        if (token) {
-            headers.set('authorization', `Bearer ${token}`);
-        }
-
-        return headers;
-    },
-});
 
 export const postAPI = createApi({
     reducerPath: 'postAPI',
@@ -24,13 +8,7 @@ export const postAPI = createApi({
     tagTypes: ['Post'],
     endpoints: (build) => ({
         fetchAllPost: build.query<IPost[], any>({
-            query: (limit: number = 5 , page: number = 1) => ({
-                url: '/posts',
-                params: {
-                    _limit: limit,
-                    _page: page,
-                }
-            }),
+            query: (page = 1, limit = 5) => `posts?_page=${page}&_limit=${limit}`,
             providesTags: result => ['Post']
         }),
         createPost: build.mutation<IPost, IPost>({

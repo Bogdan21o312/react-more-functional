@@ -17,7 +17,7 @@ const Index = () => {
     const [page, setPage] = useState(1)
     const [totalPages, setTotalPages] = useState(0)
     const [filter, setFilter] = useState({sort: '', query: ''})
-    const {data: posts, isLoading, error} = postAPI.useFetchAllPostQuery('')
+    const {data: posts, isLoading, error, isFetching} = postAPI.useFetchAllPostQuery(page)
 
     const [createPost, {error: createError, isLoading: isCreateLoading}] = postAPI.useCreatePostMutation()
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
@@ -42,6 +42,14 @@ const Index = () => {
                 Created Post
             </Button>
             <PostFilter filter={filter} setFilter={setFilter}/>
+            <Button
+                onClick={() => setPage(page - 1)}
+                disabled={page === 1}
+            >Prev Page</Button>
+            <Button
+                onClick={() => setPage(page + 1)}
+                disabled={page === posts.total_pages}
+            >Next Page</Button>
             {isLoading && <h1>Loading...</h1>}
             {error && <h2>Error...</h2>}
             {sortedAndSearchedPosts ?
