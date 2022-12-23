@@ -22,14 +22,12 @@ const Index = () => {
     const [createPost, {error: createError, isLoading: isCreateLoading}] = postAPI.useCreatePostMutation()
     const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
     const [modal, setModal] = useState(false)
-    // setTotalCount(posts['x-totral-count'])
 
     const handleCreate = (posts: IPost) => {
         createPost({...posts} as IPost)
         setModal(false)
     }
 
-    // const totalCount =
 
     const handleSetModal = () => setModal(true)
 
