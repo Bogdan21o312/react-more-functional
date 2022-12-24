@@ -15,7 +15,6 @@ import ModalWindow from "../../components/@UI/ModalWindow";
 const Index = () => {
     const [limit, setLimit] = useState(5)
     const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(0)
     const [filter, setFilter] = useState({sort: '', query: ''})
     const {data: posts, isLoading, error, isFetching} = postAPI.useFetchAllPostQuery(page)
 
@@ -46,7 +45,6 @@ const Index = () => {
             >Prev Page</Button>
             <Button
                 onClick={() => setPage(page + 1)}
-                disabled={page === posts.total_pages}
             >Next Page</Button>
             {isLoading && <h1>Loading...</h1>}
             {error && <h2>Error...</h2>}
